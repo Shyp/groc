@@ -64,6 +64,8 @@ module.exports = class Default extends Base
 
       try
         scriptSource = _.template data, @
+        if (_.isFunction(scriptSource))
+          scriptSource = scriptSource()
       catch error
         @log.error 'Failed to interpolate %s: %s', scriptPath, error.message
         return callback error
